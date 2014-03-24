@@ -11,3 +11,8 @@ when :source, :binary
 else
   Chef::Application.fatal! %(Unknown install_method: #{node[:kafka][:install_method]})
 end
+
+hostsfile_entry node["ipaddress"] do
+  hostname  node["hostname"]
+  action    :create_if_missing
+end
