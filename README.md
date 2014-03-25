@@ -104,32 +104,18 @@ well as configuring Kafka.
 * `node[:kafka][:log][:dirs]` - The directories in which the log data is kept.
 * `node[:kafka][:log][:segment_bytes]` - The maximum size of a log segment file. When this
   size is reached a new log segment will be created.
-* `node[:kafka][:log][:segment_bytes_per_topic]` - The maximum size of a single
-  log segment file for some specific topic. Should be a hash of topic -> max
-  size mappings.
 * `node[:kafka][:log][:roll_hours]` - The maximum time before a new log segment is rolled out.
-* `node[:kafka][:log][:roll_hours_per_topic]` - The maximum time before a new
-  log segment is rolled out for specific topics. Should be a hash of topic ->
-  hours mappings.
-* `node[:kafka][:log][:retention_hours]` - The number of hours to keep a log file before deleting it.
-* `node[:kafka][:log][:retention_hours_per_topic]` - The number of hours to keep
-  a log file for specific topics. Should be a hash of topic -> hours mappings.
 * `node[:kafka][:log][:retention_bytes]` - A size-based retention policy for logs. Segments
   are pruned from the log as long as the remaining segments don't drop below
   `log_retention_bytes`.
-* `node[:kafka][:log][:retention_bytes_per_topic]` - The maximum size of the log
-  for specific topics. Should be a hash of topic -> max size mappings.
-* `node[:kafka][:log][:cleanup_interval_mins]` - The frequency in minutes that
-  the log cleaner checks whether any log is eligible for deletion.
+* `node[:kafka][:log][:retention_check_interval_ms]` - The interval at which log segments are checked to see
+  if they can be deleted according to the retention policies
 * `node[:kafka][:log][:index_size_max_bytes]` - The maximum size in bytes of the offset index.
 * `node[:kafka][:log][:index_interval_bytes]` - The interval with which we add an entry to the offset index.
 * `node[:kafka][:log][:flush_interval_messages]` - The number of messages accumulated on a log partition
   before messages are flushed to disk.
 * `node[:kafka][:log][:flush_interval_ms]` - The maximum time in ms that a message in any topic is
   kept in memory before flushed to disk.
-* `node[:kafka][:log][:flush_interval_ms_per_topic]` - The maximum time in ms
-  that a message in specific topics is kept in memory before flushed to disk.
-  Should be a hash of topic -> interval mappings.
 * `node[:kafka][:log][:flush_scheduler_interval_ms]` - The frequency in ms that
   the log flusher checks whether any log needs to be flushed to disk.
 * `node[:kafka][:auto_create_topics]` - Enable auto creation of topics on the

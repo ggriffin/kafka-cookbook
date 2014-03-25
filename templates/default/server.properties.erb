@@ -60,29 +60,14 @@
 # The maximum size of a single log file
 <%= render 'partials/option.erb', variables: {key: 'log.segment.bytes', value: node[:kafka][:log][:segment_bytes]} -%>
 
-# The maximum size of a single log file for some specific topic
-<%= render 'partials/hash_option.erb', variables: {key: 'log.segment.bytes.per.topic', value: node[:kafka][:log][:segment_bytes_per_topic]} -%>
-
 # the maximum time before a new log segment is rolled out
 <%= render 'partials/option.erb', variables: {key: 'log.roll.hours', value: node[:kafka][:log][:roll_hours]} -%>
-
-# the number of hours before rolling out a new log segment for some specific topic
-<%= render 'partials/hash_option.erb', variables: {key: 'log.roll.hours.per.topic', value: node[:kafka][:log][:roll_hours_per_topic]} -%>
-
-# the number of hours to keep a log file before deleting it
-<%= render 'partials/option.erb', variables: {key: 'log.retention.hours', value: node[:kafka][:log][:retention_hours]} -%>
-
-# the number of hours to keep a log file before deleting it for some specific topic
-<%= render 'partials/hash_option.erb', variables: {key: 'log.retention.hours.per.topic', value: node[:kafka][:log][:retention_hours_per_topic]} -%>
 
 # the maximum size of the log before deleting it
 <%= render 'partials/option.erb', variables: {key: 'log.retention.bytes', value: node[:kafka][:log][:retention_bytes]} -%>
 
-# the maximum size of the log for some specific topic before deleting it
-<%= render 'partials/hash_option.erb', variables: {key: 'log.retention.bytes.per.topic', value: node[:kafka][:log][:retention_bytes_per_topic]} -%>
-
-# the frequency in minutes that the log cleaner checks whether any log is eligible for deletion
-<%= render 'partials/option.erb', variables: {key: 'log.cleanup.interval.mins', value: node[:kafka][:log][:cleanup_interval_mins]} -%>
+# The period with which we check whether any log segment is eligible for deletion to meet the retention policies.
+<%= render 'partials/option.erb', variables: {key: 'log.retention.check.interval.ms', value: node[:kafka][:log][:retention_check_interval_ms]} -%>
 
 # the maximum size in bytes of the offset index
 <%= render 'partials/option.erb', variables: {key: 'log.index.size.max.bytes', value: node[:kafka][:log][:index_size_max_bytes]} -%>
@@ -95,9 +80,6 @@
 
 # the maximum time in ms that a message in any topic is kept in memory before flushed to disk
 <%= render 'partials/option.erb', variables: {key: 'log.flush.interval.ms', value: node[:kafka][:log][:flush_interval_ms]} -%>
-
-# the maximum time in ms that a message in selected topics is kept in memory before flushed to disk, e.g., topic1:3000,topic2:6000
-<%= render 'partials/hash_option.erb', variables: {key: 'log.flush.interval.ms.per.topic', value: node[:kafka][:log][:flush_interval_ms_per_topic]} -%>
 
 # the frequency in ms that the log flusher checks whether any log needs to be flushed to disk
 <%= render 'partials/option.erb', variables: {key: 'log.flush.scheduler.interval.ms', value: node[:kafka][:log][:flush_scheduler_interval_ms]} -%>

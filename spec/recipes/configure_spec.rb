@@ -117,52 +117,16 @@ describe 'kafka::_configure' do
         expect(chef_run).to have_configured(path).with('log.segment.bytes').as(1 * 1024 * 1024 * 1024)
       end
 
-      context 'segment bytes per topic' do
-        it_behaves_like 'a hash based option' do
-          let :option do
-            :segment_bytes_per_topic
-          end
-        end
-      end
-
       it 'sets default roll hours' do
         expect(chef_run).to have_configured(path).with('log.roll.hours').as(24 * 7)
-      end
-
-      context 'roll hours per topic' do
-        it_behaves_like 'a hash based option' do
-          let :option do
-            :roll_hours_per_topic
-          end
-        end
-      end
-
-      it 'sets default log retention hours' do
-        expect(chef_run).to have_configured(path).with('log.retention.hours').as(24 * 7)
-      end
-
-      context 'log retention hours per topic' do
-        it_behaves_like 'a hash based option' do
-          let :option do
-            :retention_hours_per_topic
-          end
-        end
       end
 
       it 'sets default log retention bytes' do
         expect(chef_run).to have_configured(path).with('log.retention.bytes').as(-1)
       end
 
-      context 'log retention bytes per topic' do
-        it_behaves_like 'a hash based option' do
-          let :option do
-            :retention_bytes_per_topic
-          end
-        end
-      end
-
       it 'sets default log cleanup interval (minutes)' do
-        expect(chef_run).to have_configured(path).with('log.cleanup.interval.mins').as(10)
+        expect(chef_run).to have_configured(path).with('log.retention.check.interval.ms').as(5 * 60 * 1000)
       end
 
       it 'sets default max bytesize of index' do
@@ -179,14 +143,6 @@ describe 'kafka::_configure' do
 
       it 'sets default log flush interval (ms)' do
         expect(chef_run).to have_configured(path).with('log.flush.interval.ms').as(3000)
-      end
-
-      context 'log flush interval (ms) per topic' do
-        it_behaves_like 'a hash based option' do
-          let :option do
-            :flush_interval_ms_per_topic
-          end
-        end
       end
 
       it 'sets default log flush scheduler interval (ms)' do
